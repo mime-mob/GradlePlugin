@@ -1,7 +1,18 @@
-apply plugin:'groovy'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+uploadArchives{
+    repositories{
+        flatDir{
+            name "localRepository"
+            dir "localRepository/libs"
+        }
+    }
+}
+
+group = "com.mime.houyi"
+version = "1.0"
 
 dependencies {
-    compile localGroovy()
     compile gradleApi()
-    testCompile 'junit:junit:4.12'
 }

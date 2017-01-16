@@ -1,4 +1,4 @@
-package com.mime.houyi.helloworld;
+package com.app.houyi.helloworld;
 
 import org.junit.Test;
 
