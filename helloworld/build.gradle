@@ -1,5 +1,5 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'java'//导入java插件用于，编译打包我们的插件
+apply plugin: 'maven'//maven插件，用于上传插件到仓库
 
 uploadArchives{
     repositories{
@@ -11,8 +11,9 @@ uploadArchives{
 }
 
 group = "com.mime.houyi"
-version = "1.0"
+version = "1.5"
 
 dependencies {
+    //导入Gradle的api
     compile gradleApi()
 }
