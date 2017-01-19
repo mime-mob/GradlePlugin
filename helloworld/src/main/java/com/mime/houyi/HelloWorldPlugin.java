@@ -18,9 +18,11 @@ import java.io.File;
 public class HelloWorldPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
+        project.container(HelloManData.class);
         WriteHelloManTask task = project.getTasks().create("writeHello", WriteHelloManTask.class);
         task.setFileName("HelloWorld.txt");
         task.setHelloMan(new HelloManData("Jim",19));
         task.setTargetDirectory(new File("D:/workspace"));
+        task.setGroup("hello");
     }
 }

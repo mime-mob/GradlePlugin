@@ -22,61 +22,56 @@ import java.io.IOException;
  */
 
 
-public class WriteHelloManTask extends DefaultTask {
-    private HelloManData helloMan;
-    private File targetDirectory;
-    private String fileName;
-    private File targetFile;
+    public class WriteHelloManTask extends DefaultTask {
+        private HelloManData helloMan;
+        private File targetDirectory;
+        private String fileName;
 
-    @Nested
-    public HelloManData getHelloMan(){
-        return helloMan;
-    }
-
-    @OutputFile
-    public File getTargetFile(){
-        return targetFile;
-    }
-
-    @Input
-    public String getFileName(){
-        return fileName;
-    }
-
-    public void setTargetFile(File targetFile) {
-        this.targetFile = targetFile;
-    }
-
-    @InputDirectory
-    public File getTargetDirectory() {
-        return targetDirectory;
-    }
-
-    @TaskAction
-    public void writeObject(){
-        targetFile = new File(targetDirectory, fileName);
-        try {
-            FileOutputStream fos = new FileOutputStream(targetFile);
-            byte[] bytes = helloMan.toString().getBytes();
-            fos.write(bytes);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        @Nested
+        public HelloManData getHelloMan(){
+            return helloMan;
         }
-    }
 
-    public void setHelloMan(HelloManData helloMan) {
-        this.helloMan = helloMan;
-    }
+        @OutputFile
+        public File getTargetFile(){
+            return new File(targetDirectory, fileName);
+        }
 
-    public void setTargetDirectory(File targetDirectory) {
-        this.targetDirectory = targetDirectory;
-    }
+        @Input
+        public String getFileName(){
+            return fileName;
+        }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
+        @InputDirectory
+        public File getTargetDirectory() {
+            return targetDirectory;
+        }
+
+        @TaskAction
+        public void writeObject(){
+            File targetFile = new File(targetDirectory, fileName);
+            try {
+                FileOutputStream fos = new FileOutputStream(targetFile);
+                byte[] bytes = helloMan.toString().getBytes();
+                fos.write(bytes);
+                fos.flush();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void setHelloMan(HelloManData helloMan) {
+            this.helloMan = helloMan;
+        }
+
+        public void setTargetDirectory(File targetDirectory) {
+            this.targetDirectory = targetDirectory;
+        }
+
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
 }
