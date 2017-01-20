@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.mime.houyi.helloworld'
+apply plugin: 'com.mime.houyi.hellodsl'
 
 android {
     compileSdkVersion 25
@@ -17,15 +17,24 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 
-
-
-writeHello{
-    fileName "dddd.txt"
-
+helloDSL {
+    libraries{
+        Nanjing{
+            libraryDetail "1111"
+            bookCount 56000
+        }
+    }
+    books {
+        thinkingInJava{
+            bookLocation libraries.Nanjing
+        }
+    }
 }
+
 
 dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

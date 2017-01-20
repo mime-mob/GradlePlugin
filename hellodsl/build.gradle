@@ -1,5 +1,14 @@
 apply plugin: 'java'
+apply plugin: 'maven'
 
+uploadArchives{
+    repositories{
+        mavenLocal()
+    }
+}
+
+group "com.mime.houyi"
+version "1.0"
 
 dependencies {
     compile gradleApi()
