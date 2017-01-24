@@ -3,6 +3,8 @@ package com.mime.houyi;
 import org.gradle.api.Project;
 import org.gradle.internal.reflect.Instantiator;
 
+import java.io.Serializable;
+
 /**
  * <p>write the description
  *
@@ -13,7 +15,8 @@ import org.gradle.internal.reflect.Instantiator;
  */
 
 
-public class Book {
+public class Book implements Serializable {
+    private static final long serialVersionUID = 4933666750282521704L;
     final String name;
     private Project project;
     private Instantiator instantiator;

@@ -1,9 +1,14 @@
 package com.mime.houyi;
 
 import org.gradle.api.DefaultTask;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.InputDirectory;
+import org.gradle.api.tasks.OutputDirectory;
+import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>write the books defined in the Gradle DSL to an given
@@ -17,7 +22,35 @@ import java.util.List;
  */
 
 
-public class WriteBookTask extends DefaultTask {
+public class WriteBookTask extends DefaultTask{
     private File targetDirectory;
-    private List<Book> mBooks;
+    private Map<Library,List<Book>> mBooks;
+
+    @InputDirectory
+    public File getTargetDirectory() {
+        return targetDirectory;
+    }
+
+    public void setTargetDirectory(File targetDirectory) {
+        this.targetDirectory = targetDirectory;
+    }
+
+    @Input
+    public Map<Library, List<Book>> getBooks() {
+        return mBooks;
+    }
+
+    public void setBooks(Map<Library, List<Book>> books) {
+        mBooks = books;
+    }
+
+    @OutputDirectory
+    public File getResultDirectory(){
+        return new File(targetDirectory,"Libraries");
+    }
+
+    @TaskAction
+    public void createLibraries(){
+
+    }
 }

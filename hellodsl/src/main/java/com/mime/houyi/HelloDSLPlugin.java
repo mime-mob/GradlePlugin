@@ -6,6 +6,10 @@ import org.gradle.api.Project;
 import org.gradle.internal.reflect.Instantiator;
 import org.gradle.invocation.DefaultGradle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
@@ -36,9 +40,18 @@ public class HelloDSLPlugin implements Plugin<Project> {
         WriteBookTask writeBooks = project.getTasks().create("writeBooks", WriteBookTask.class);
         SortedMap<String, Book> asMap = myExtension.getBooks().getAsMap();
         SortedSet<String> names = myExtension.getLibraries().getNames();
+        Map<Library,List<Book>> bookCategories = new HashMap<>();
         for (String name : names) {
-
+                List<Book> books = new ArrayList<>();
+            for (String book : asMap.keySet()) {
+                if(asMap.get(book).getBookLocation().getName().equals(name)){
+                    books.add(asMap.get(book));
+                }
+            }
+            bookCategories.put(myExtension.getLibraries().getByName(name),books);
         }
+
+
     }
 
     private void configExtension() {

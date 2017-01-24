@@ -1,5 +1,7 @@
 package com.mime.houyi;
 
+import java.io.Serializable;
+
 /**
  * <p>write the description
  *
@@ -10,7 +12,8 @@ package com.mime.houyi;
  */
 
 
-public class Library {
+public class Library implements Serializable{
+    private static final long serialVersionUID = 79987269263359336L;
     private final String mName;
     private String libraryDetail;
     private int bookCount;
