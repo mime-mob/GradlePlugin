@@ -14,50 +14,53 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 
 /**
- * <p>write the description
+ * <p>write the description</p>
  *
  * @author houyi
  * @version [版本号]
  * @see [相关类/方法]
- * @since [产品/模块版本]
+ * @since [产品/模块版本].
  */
 
 
 public class HelloDSLPlugin implements Plugin<Project> {
-    private Project project;
-    private Instantiator instantiator;
-    private MyExtension myExtension;
+    private Project mProject;
+    private Instantiator mInstantiator;
+    private MyExtension mMyExtension;
 
     @Override
     public void apply(Project project) {
-        this.project = project;
-        instantiator = ((DefaultGradle) project.getGradle()).getServices().get(Instantiator.class);
+        this.mProject = project;
+        mInstantiator = ((DefaultGradle) project.getGradle()).getServices().get(Instantiator.class);
         configExtension();
         configWriteBookTask();
     }
 
     private void configWriteBookTask() {
-        WriteBookTask writeBooks = project.getTasks().create("writeBooks", WriteBookTask.class);
-        SortedMap<String, Book> asMap = myExtension.getBooks().getAsMap();
-        SortedSet<String> names = myExtension.getLibraries().getNames();
-        Map<Library,List<Book>> bookCategories = new HashMap<>();
+        WriteBookTask writeBooks = mProject.getTasks().create("writeBooks", WriteBookTask.class);
+        SortedMap<String, Book> asMap = mMyExtension.getBooks().getAsMap();
+        SortedSet<String> names = mMyExtension.getLibraries().getNames();
+        Map<Library, List<Book>> bookCategories = new HashMap<>();
         for (String name : names) {
-                List<Book> books = new ArrayList<>();
+            List<Book> books = new ArrayList<>();
             for (String book : asMap.keySet()) {
-                if(asMap.get(book).getBookLocation().getName().equals(name)){
+                if (asMap.get(book).getBookLocation().getName().equals(name)) {
                     books.add(asMap.get(book));
                 }
             }
-            bookCategories.put(myExtension.getLibraries().getByName(name),books);
+            bookCategories.put(mMyExtension.getLibraries().getByName(name), books);
         }
 
 
     }
 
     private void configExtension() {
-        NamedDomainObjectContainer<Book> BookContainer = project.container(Book.class, new BookFactory(instantiator, project));
-        NamedDomainObjectContainer<Library> libraryContainer = project.container(Library.class, new LibraryFactory(instantiator));
-        myExtension = project.getExtensions().create("helloDSL", MyExtension.class, new Object[]{project, instantiator, BookContainer, libraryContainer});
+        NamedDomainObjectContainer<Book> bookContainer = mProject.container(Book.class,
+                new BookFactory(mInstantiator, mProject));
+        NamedDomainObjectContainer<Library> libraryContainer = mProject.container(Library.class,
+                new LibraryFactory(mInstantiator));
+        mMyExtension = mProject.getExtensions().create("bookManager", MyExtension.class,
+                new Object[]{mProject, mInstantiator, bookContainer, libraryContainer});
     }
 
 }

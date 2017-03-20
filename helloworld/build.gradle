@@ -17,4 +17,5 @@ dependencies {
     //导入Gradle的api
     compile gradleApi()
     compile 'com.android.tools.build:gradle:2.2.3'
+    compile 'com.tencent.tinker:tinker-patch-gradle-plugin:1.7.7'
 }

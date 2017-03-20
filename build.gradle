@@ -10,14 +10,24 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-//        classpath 'com.mime.houyi:helloworld:1.1'
-        classpath 'com.mime.houyi:hellodsl:1.0'
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath(group:'com.mime.houyi',name:'createdsl',version: '1.1') {
+            changing = true
+        }
+//        classpath(group:'com.mime.houyi',name:'helloworld',version: '1.1') {
+//            changing = true
+//        }
+//        classpath(group:'com.mime.houyi',name:'hellodsl',version: '1.1') {
+//            changing = true
+//        }
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+}
 
 allprojects {
     repositories {

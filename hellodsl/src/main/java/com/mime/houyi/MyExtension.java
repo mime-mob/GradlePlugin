@@ -19,12 +19,14 @@ import org.gradle.internal.reflect.Instantiator;
 public class MyExtension {
     private NamedDomainObjectContainer<Book> books;
     private NamedDomainObjectContainer<Library> libraries;
+    private LibraryManager mLibraryManager;
     private Project project;
 
     public MyExtension(Project project, Instantiator instantiator,NamedDomainObjectContainer<Book> bookContainer,NamedDomainObjectContainer<Library> libraryContainer) {
         this.project = project;
         this.books = bookContainer;
         this.libraries = libraryContainer;
+        this.mLibraryManager = instantiator.newInstance(LibraryManager.class,new Object[0]);
     }
 
     public NamedDomainObjectContainer<Book> getBooks() {

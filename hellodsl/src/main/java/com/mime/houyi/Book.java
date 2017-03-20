@@ -11,45 +11,49 @@ import java.io.Serializable;
  * @author houyi
  * @version [版本号]
  * @see [相关类/方法]
- * @since [产品/模块版本]
+ * @since [产品/模块版本].
  */
 
 
 public class Book implements Serializable {
     private static final long serialVersionUID = 4933666750282521704L;
-    final String name;
-    private Project project;
-    private Instantiator instantiator;
+    final String mName;
+    private Project mProject;
+    private Instantiator mInstantiator;
     private Library bookLocation;
+    private String description;
 
     private Book(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
+    /**
+     *
+     */
     public Book(String name, Instantiator instantiator, Project project){
-        this.name = name;
-        this.instantiator = instantiator;
-        this.project = project;
+        this.mName = name;
+        this.mInstantiator = instantiator;
+        this.mProject = project;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public Project getProject() {
-        return project;
+        return mProject;
     }
 
     public void setProject(Project project) {
-        this.project = project;
+        this.mProject = project;
     }
 
     public Instantiator getInstantiator() {
-        return instantiator;
+        return mInstantiator;
     }
 
     public void setInstantiator(Instantiator instantiator) {
-        this.instantiator = instantiator;
+        this.mInstantiator = instantiator;
     }
 
     public Library getBookLocation() {
@@ -58,5 +62,13 @@ public class Book implements Serializable {
 
     public void setBookLocation(Library bookLocation) {
         this.bookLocation = bookLocation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

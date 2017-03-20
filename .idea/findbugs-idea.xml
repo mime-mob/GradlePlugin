@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FindBugs-IDEA">
+    <plugins>
+      <plugin id="jp.f.dev.findbugs.detect.android" enabled="true" bundled="true" />
+    </plugins>
+    <excludeFilterFiles>
+      <filter file="E:/android_doc/config/findbugs-android-exclude.xml" enabled="true" />
+    </excludeFilterFiles>
+    <detectors>
+      <detector name="AtomicityProblem" enabled="false" />
+      <detector name="CheckTypeQualifiers" enabled="false" />
+      <detector name="ConfusionBetweenInheritedAndOuterMethod" enabled="false" />
+      <detector name="DoInsideDoPrivileged" enabled="false" />
+      <detector name="DontIgnoreResultOfPutIfAbsent" enabled="false" />
+      <detector name="DroppedException" enabled="false" />
+      <detector name="ExplicitSerialization" enabled="false" />
+      <detector name="FindDoubleCheck" enabled="false" />
+      <detector name="FindPuzzlers" enabled="false" />
+      <detector name="FindSqlInjection" enabled="false" />
+      <detector name="IDivResultCastToDouble" enabled="false" />
+      <detector name="InheritanceUnsafeGetResource" enabled="false" />
+      <detector name="IntCast2LongAsInstant" enabled="false" />
+      <detector name="InvalidJUnitTest" enabled="false" />
+      <detector name="LoadOfKnownNullValue" enabled="false" />
+      <detector name="LostLoggerDueToWeakReference" enabled="false" />
+      <detector name="MutableEnum" enabled="false" />
+      <detector name="Naming" enabled="false" />
+      <detector name="NoteUnconditionalParamDerefs" enabled="false" />
+      <detector name="OptionalReturnNull" enabled="false" />
+      <detector name="RedundantInterfaces" enabled="false" />
+      <detector name="RuntimeExceptionCapture" enabled="false" />
+      <detector name="StaticCalendarDetector" enabled="false" />
+    </detectors>
+  </component>
+</project>
