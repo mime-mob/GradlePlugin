@@ -6,7 +6,6 @@
 /captures
 .externalNativeBuild
 .localRepository
-*.iml
 /*/*.iml
 .idea
 /*/.idea/

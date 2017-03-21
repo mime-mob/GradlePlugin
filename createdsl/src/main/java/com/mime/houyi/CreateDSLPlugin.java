@@ -1,7 +1,10 @@
 package com.mime.houyi;
 
+import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.internal.reflect.Instantiator;
+import org.gradle.invocation.DefaultGradle;
 
 /**
  * <p>write the description
@@ -15,6 +18,12 @@ import org.gradle.api.Project;
 public class CreateDSLPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
-        MyExtension mMyExtension = project.getExtensions().create("myExtension", MyExtension.class);
+        Instantiator instantiator = ((DefaultGradle) project.getGradle()).getServices().get(
+                Instantiator.class);
+        NamedDomainObjectContainer<SmallExtension> smallExtensionsContainer = project.container(
+                SmallExtension.class, new SmallExtensionFactory(instantiator));
+        MyExtension mMyExtension = project.getExtensions().create("myExtension", MyExtension.class,
+                new Object[]{instantiator,smallExtensionsContainer});
+        //create方法的第三个参数是MyExtension的构造参数
     }
 }
