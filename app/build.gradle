@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.mime.houyi.hellodsl'
-apply plugin: 'com.mime.houyi.createdsl'
+apply plugin: 'com.mime.houyi.hellodsl'
+//apply plugin: 'com.mime.houyi.createdsl'
 
 android {
     compileSdkVersion 25
@@ -22,35 +22,38 @@ android {
     }
 }
 
-    myExtension {
-        extensionName "ddd" //简单属性
-        innerExtension{//对象类型
-            extensionName "innerExtension"
-        }
-        smallExtensions{//命名对象容器
-            extension1{
-                extensionName "11"
-            }
-            extension2{
-                extensionName "22"
-            }
+//    myExtension {
+//        extensionName "ddd" //简单属性
+//        innerExtension{//对象类型
+//            extensionName "innerExtension"
+//        }
+//        smallExtensions{//命名对象容器
+//            extension1{
+//                extensionName "11"
+//            }
+//            extension2{
+//                extensionName "22"
+//            }
+//        }
+//    }
+
+
+bookManager {
+    libraries{
+        Nanjing{
+            libraryDetail "1111"
+            bookCount 56000
         }
     }
-
-
-//helloDSL {
-//    libraries{
-//        Nanjing{
-//            libraryDetail "1111"
-//            bookCount 56000
-//        }
-//    }
-//    books {
-//        thinkingInJava{
-//            bookLocation libraries.Nanjing
-//        }
-//    }
-//}
+    books {
+        thinkingInJava{
+            bookLocation libraries.Nanjing
+        }
+        thinkingInJava1{
+            bookLocation libraries.Nanjing
+        }
+    }
+}
 
 
 dependencies {

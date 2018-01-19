@@ -18,8 +18,6 @@ import java.io.Serializable;
 public class Book implements Serializable {
     private static final long serialVersionUID = 4933666750282521704L;
     final String mName;
-    private Project mProject;
-    private Instantiator mInstantiator;
     private Library bookLocation;
     private String description;
 
@@ -30,30 +28,12 @@ public class Book implements Serializable {
     /**
      *
      */
-    public Book(String name, Instantiator instantiator, Project project){
+    public Book(String name, Instantiator instantiator){
         this.mName = name;
-        this.mInstantiator = instantiator;
-        this.mProject = project;
     }
 
     public String getName() {
         return mName;
-    }
-
-    public Project getProject() {
-        return mProject;
-    }
-
-    public void setProject(Project project) {
-        this.mProject = project;
-    }
-
-    public Instantiator getInstantiator() {
-        return mInstantiator;
-    }
-
-    public void setInstantiator(Instantiator instantiator) {
-        this.mInstantiator = instantiator;
     }
 
     public Library getBookLocation() {

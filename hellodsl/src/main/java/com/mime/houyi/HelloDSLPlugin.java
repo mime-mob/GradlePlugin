@@ -6,12 +6,14 @@ import org.gradle.api.Project;
 import org.gradle.internal.reflect.Instantiator;
 import org.gradle.invocation.DefaultGradle;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 
 /**
  * <p>write the description</p>
@@ -33,15 +35,19 @@ public class HelloDSLPlugin implements Plugin<Project> {
         this.mProject = project;
         mInstantiator = ((DefaultGradle) project.getGradle()).getServices().get(Instantiator.class);
         configExtension();
-        configWriteBookTask();
+        mProject.afterEvaluate(project1 -> configWriteBookTask());
     }
 
     private void configWriteBookTask() {
         WriteBookTask writeBooks = mProject.getTasks().create("writeBooks", WriteBookTask.class);
         SortedMap<String, Book> asMap = mMyExtension.getBooks().getAsMap();
-        SortedSet<String> names = mMyExtension.getLibraries().getNames();
+        SortedSet<String> libraryNames = mMyExtension.getLibraries().getNames();
+        if(asMap.isEmpty()||libraryNames.isEmpty()){
+            return;
+        }
+        ArrayList<String> names = new ArrayList<>(libraryNames);
         Map<Library, List<Book>> bookCategories = new HashMap<>();
-        for (String name : names) {
+        for (String name : libraryNames) {
             List<Book> books = new ArrayList<>();
             for (String book : asMap.keySet()) {
                 if (asMap.get(book).getBookLocation().getName().equals(name)) {
@@ -50,13 +56,19 @@ public class HelloDSLPlugin implements Plugin<Project> {
             }
             bookCategories.put(mMyExtension.getLibraries().getByName(name), books);
         }
-
-
+        writeBooks.setLibraries(names);
+        writeBooks.setBooks(bookCategories);
+        File writeBook = new File(mProject.getProjectDir(),"writeBook");
+        if(!writeBook.exists()){
+            writeBook.mkdir();
+        }
+        writeBooks.setTargetDirectory(writeBook);
+        writeBooks.createLibraries();
     }
 
     private void configExtension() {
         NamedDomainObjectContainer<Book> bookContainer = mProject.container(Book.class,
-                new BookFactory(mInstantiator, mProject));
+                new BookFactory(mInstantiator));
         NamedDomainObjectContainer<Library> libraryContainer = mProject.container(Library.class,
                 new LibraryFactory(mInstantiator));
         mMyExtension = mProject.getExtensions().create("bookManager", MyExtension.class,

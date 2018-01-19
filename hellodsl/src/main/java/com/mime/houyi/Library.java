@@ -16,7 +16,7 @@ public class Library implements Serializable{
     private static final long serialVersionUID = 79987269263359336L;
     private final String mName;
     private String libraryDetail;
-    private int bookCount;
+    private Integer bookCount;
 
     public Library(String name) {
         mName = name;

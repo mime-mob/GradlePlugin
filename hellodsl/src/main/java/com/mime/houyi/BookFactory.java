@@ -17,15 +17,13 @@ import org.gradle.internal.reflect.Instantiator;
 
 public class BookFactory implements NamedDomainObjectFactory<Book> {
     private final Instantiator instantiator;
-    private final Project project;
 
-    public BookFactory(Instantiator instantiator, Project project) {
+    public BookFactory(Instantiator instantiator) {
         this.instantiator = instantiator;
-        this.project = project;
     }
 
     @Override
     public Book create(String name) {
-        return instantiator.newInstance(Book.class,new Object[]{name,instantiator,project});
+        return instantiator.newInstance(Book.class,new Object[]{name,instantiator});
     }
 }
